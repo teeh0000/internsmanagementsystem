@@ -217,7 +217,7 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
 .tl{list-style:none;padding:0;margin:6px 0 0}.tl li{display:flex;gap:12px;align-items:center;padding:6px 0;font-size:.8125rem;color:var(--ink)}.tl li::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid var(--line);background:#fff;flex:none}.tl li.d::before{background:var(--accent);border-color:var(--accent)}.tl small{margin-left:auto;color:var(--text);font-size:.78rem}
 .dl{display:grid;gap:9px;font-size:.8125rem}.dl>div{display:flex;justify-content:space-between;gap:14px;padding-bottom:9px;border-bottom:1px solid #eef1f6}.dl span{color:var(--text)}.dl b{color:var(--ink);font-weight:500;text-align:right;word-break:break-word}
 .chip.w{background:#fff4dc;color:#b7791f}
-.side{background:radial-gradient(circle at 0 0,rgba(29,78,216,.4),transparent 55%),#0f1f3d;overflow:hidden}
+.side{background:#0f1f3d;overflow:hidden}
 .side::after{content:"";position:absolute;right:-110px;bottom:120px;width:240px;height:240px;border-radius:50%;border:1px solid rgba(255,255,255,.08);pointer-events:none}
 .side>*{position:relative;z-index:1}
 .nav button.on{background:linear-gradient(90deg,rgba(56,189,248,.24),rgba(255,255,255,.08));box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
@@ -233,6 +233,8 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
 .side #so{background:#fff;color:var(--ink);justify-content:center;gap:8px;font-weight:600;padding:11px 12px;border-radius:10px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
 .side #so:hover{background:var(--soft);color:var(--ink);transform:none}
 @media(max-width:760px){.sc,.me,.bdg,.side::after{display:none}.side{overflow:visible}.side #so{display:none}}
+.btn.sm{padding:6px 12px;font-size:.78rem}
+input:disabled,select:disabled{background:#f6f8fc;color:var(--ink);opacity:1;cursor:default;-webkit-text-fill-color:var(--ink)}
 /* Reduced motion: only calm the endless background loops, keep the meaningful animations */
 @media(prefers-reduced-motion:reduce){.auth-l::before,.auth-l::after,.hero::before,.hero::after,.wave{animation:none}}
 </style>
@@ -241,7 +243,7 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
 
 <!-- ============ LOGIN ============ -->
 <section id="login">
-  <!-- Demo access (mockup only, remove when your server login is connected):  admin@internsregistry.local  /  Admin#2026 -->
+  <!-- Demo access (mockup only, remove when your server login is connected):  admin: admin@internsregistry.local / Admin#2026   staff: staff@internsregistry.local / Staff#Demo2026! -->
   <div class="lcard">
     <div class="visual" aria-hidden="true"><img src="images/login-image.jpg" alt="" onerror="this.remove()"></div>
     <div class="lpanel">
@@ -249,7 +251,7 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
         <img class="logo-img lg" src="images/coat-of-arms.jpg" alt="Organisation logo"><svg class="fb" hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
       </div>
       <form id="lf" novalidate>
-        <h1>Administrator login</h1>
+        <h1>Staff &amp; admin login</h1>
         <p class="sub">Sign in to register and manage interns and attachees.</p>
         <div class="field" id="fe"><label for="em">Email</label><input id="em" type="text" autocomplete="username" placeholder="admin@example.com" autocapitalize="off" spellcheck="false" maxlength="254"></div>
         <div class="field" id="fp"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password" placeholder="Your password" maxlength="128"><button type="button" class="toggle" id="tg" aria-pressed="false">Show</button></div>
@@ -272,10 +274,10 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
     <nav class="nav" id="nav">
       <button data-v="over" class="on"><img class="ni" src="images/icons/overview.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/overview.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>Overview</button>
       <button data-v="dir"><img class="ni" src="images/icons/interns-attachees.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/interns-attachees.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.3-5.5 6.5-5.5s5.700 1.900 6.500 5.500"/><path d="M16 4.800a3.500 3.500 0 010 6.400M18 14.800c1.900.7 3.100 2.400 3.500 5.200"/></svg>Interns &amp; attachees<span class="bdg" id="nb"></span></button>
-      <button data-v="cal"><img class="ni" src="images/icons/calendar.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/calendar.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button>
+      <button data-v="cal"><img class="ni" src="images/icons/calendar.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/calendar.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Calendar</button><button data-v="staff" id="nstaff" hidden><img class="ni" src="images/icons/staff.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/staff.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.3-5.5 7-5.5s6.2 1.9 7 5.5"/><path d="M17 4.5l1.2 1.2L20.5 3.5"/></svg>Staff<span class="bdg" id="ns"></span></button>
     </nav>
     <div class="sc"><small>Registered</small><b id="sn">0</b><small id="sd"></small><div class="sp"><i id="si"></i></div><div class="sl"><span id="l1"></span><span id="l2"></span></div></div>
-    <div class="me"><span class="av" style="background:#fff;color:var(--ink)">A</span><span><b>Administrator</b><small>Signed in</small></span></div>
+    <div class="me"><span class="av" id="meav" style="background:#fff;color:var(--ink)">A</span><span><b id="men">Administrator</b><small id="mer">Signed in</small></span></div>
     <div class="nav out"><button id="so"><img class="ni" src="images/icons/sign-out.png" alt="" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='images/sign-out.png'}else{this.hidden=true;this.nextElementSibling.removeAttribute('hidden')}"><svg hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5a2 2 0 00-2 2v12a2 2 0 002 2h4M16 8l4 4-4 4M20 12H9"/></svg>Sign out</button></div>
   </aside>
 
@@ -319,6 +321,7 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
         <div class="card" id="cs"></div>
       </div>
     </section>
+  <section class="view" id="v-staff"></section>
   </main>
 </div>
 
@@ -402,7 +405,7 @@ EDDY MOSES OTIENO|PBU
 PURITY ADHIAMBO OPIYO|PBU
 NEEMAH JERONO BUNDOTICH|LPS`;
 const cap=s=>s.toLowerCase().replace(/(^|\s)\S/g,m=>m.toUpperCase());
-const PEOPLE=RAW.split("\n").map((l,i)=>{const[n,c]=l.split("|");return{id:i+1,name:cap(n),dept:c,type:"Intern",gender:"",idno:"",phone:"",email:"",inst:"",study:"",start:"",end:"",bank:"",acc:""}});
+const PEOPLE=RAW.split("\n").map((l,i)=>{const[n,c]=l.split("|");return{id:i+1,name:cap(n),dept:c,type:"Intern",gender:"",idno:"",phone:"",email:"",inst:"",study:"",start:"",end:"",bank:"",acc:"",by:"Imported list"}});
 let nextId=PEOPLE.length+1;
 
 const $=id=>document.getElementById(id);
@@ -430,24 +433,70 @@ const ic=k=>`<i><img class="si" src="images/icons/${IF[k]}.png" alt="" onerror="
 document.querySelectorAll(".lg").forEach(img=>{const miss=()=>{img.hidden=true;img.nextElementSibling.removeAttribute("hidden")};img.addEventListener("error",miss);if(img.complete&&img.naturalWidth===0)miss()});
 
 /* ---------- Login (demo). Replace with a POST to your server; the server must check the password. ---------- */
-const ADMIN={email:"admin@internsregistry.local",pass:"Admin#2026"};
+/* MOCKUP accounts. In the real system the SERVER must check the role on every request:
+   staff accounts may only add and read interns/attachees, and must never be sent any staff data. Hiding things here is for looks only. */
+const ADMIN={email:"admin@internsregistry.local",pass:"Admin#2026",name:"Admin"};
+const STAFF=[{id:1,name:"Demo Staff",idno:"12345678",phone:"0712 345 678",email:"staff@internsregistry.local",title:"Registration officer",dept:"HRM",staffNo:"ST-001",joined:"2026-01-05",pass:"Staff#Demo2026!",active:true}];
+let nextStaff=2,ME=null;
+function applyRole(){const a=ME.role==="admin";$("nstaff").hidden=!a;$("meav").textContent=ini(ME.name)||"A";$("men").textContent=a?"Administrator":ME.name;$("mer").textContent=(a?"Admin":"Staff")+" · signed in";if(!a)$("v-staff").innerHTML=""}
+function renderStaff(){
+  if(!ME||ME.role!=="admin"){$("v-staff").innerHTML="";return}
+  const act=STAFF.filter(x=>x.active).length,NS='<span class="muted">Not set</span>';
+  $("v-staff").innerHTML=`<div class="top"><div><h1>Staff</h1><p class="sub">Only administrators can see this page. Staff can add and view interns and attachees, nothing more.</p></div><button class="btn" id="addstaff">Add staff member</button></div>
+  <div class="card tw"><table style="min-width:1000px"><thead><tr><th>Staff member</th><th>ID number</th><th>Phone</th><th>Email</th><th>Department</th><th>Status</th><th>Added</th><th></th></tr></thead><tbody>`+(STAFF.length?STAFF.map(x=>`<tr data-sid="${x.id}"><td><div class="who"><span class="av">${esc(ini(x.name))}</span><span>${esc(x.name)}<small style="display:block;font-weight:400;color:var(--text)">${esc(x.title)}</small></span></div></td><td>${esc(x.idno)}</td><td>${esc(x.phone)}</td><td>${esc(x.email)}</td><td>${x.dept?esc(D[x.dept]):NS}</td><td><span class="chip ${x.active?"a":"w"}">${x.active?"Active":"Disabled"}</span></td><td>${PEOPLE.filter(p=>p.by===x.name).length}</td><td style="text-align:right;white-space:nowrap"><button class="btn ghost sm" data-st="${x.id}" data-a="tog">${x.active?"Disable":"Enable"}</button> <button class="btn ghost sm" data-st="${x.id}" data-a="del">Remove</button></td></tr>`).join(""):`<tr><td colspan="8" class="empty">No staff yet. Add the first one.</td></tr>`)+`</tbody></table></div><p class="count">${act} active of ${STAFF.length}. Click a row to see all of a person's details.</p>`;
+  $("addstaff").onclick=openStaff;
+  $("v-staff").onclick=e=>{const b=e.target.closest("[data-st]");
+    if(b){const x=STAFF.find(y=>y.id===+b.dataset.st);if(!x)return;
+      if(b.dataset.a==="del"){if(!confirm("Remove "+x.name+"? They will no longer be able to log in."))return;STAFF.splice(STAFF.indexOf(x),1)}else x.active=!x.active;
+      renderStaff();sideInfo();return}
+    const r=e.target.closest("[data-sid]");if(r)openStaffView(+r.dataset.sid)};
+}
+function openStaffView(id){
+  const x=STAFF.find(y=>y.id===id);if(!x||!ME||ME.role!=="admin")return;
+  const NA='<span class="muted">Not recorded</span>',v=t=>t?esc(t):NA;
+  layer.innerHTML=`<div class="scrim" id="sc"></div><aside class="drawer" role="dialog" aria-label="Staff details"><div class="dh"><span class="av">${esc(ini(x.name))}</span><div><h1 style="font-size:1.15rem">${esc(x.name)}</h1><span class="chip ${x.active?"a":"w"}">${x.active?"Active":"Disabled"}</span></div><button class="x" id="cx" aria-label="Close">&times;</button></div>
+  <p class="sub" style="margin:-4px 0 4px">Only administrators can see this.</p>
+  <p class="sect">Work</p><div class="dl"><div><span>Work they do</span><b>${v(x.title)}</b></div><div><span>Department</span><b>${x.dept?esc(D[x.dept]):NA}</b></div><div><span>Staff number</span><b>${v(x.staffNo)}</b></div><div><span>Date joined</span><b>${x.joined?fmtD(x.joined):NA}</b></div><div><span>Records added</span><b>${PEOPLE.filter(p=>p.by===x.name).length}</b></div></div>
+  <p class="sect">Identity and contact</p><div class="dl"><div><span>ID number</span><b>${v(x.idno)}</b></div><div><span>Phone</span><b>${v(x.phone)}</b></div><div><span>Email</span><b>${v(x.email)}</b></div></div>
+  <div class="btnrow" style="margin-top:20px"><button class="btn ghost" id="cx2">Close</button></div></aside>`;
+  $("sc").onclick=$("cx").onclick=$("cx2").onclick=close;
+}
+function openStaff(){
+  layer.innerHTML=`<div class="scrim" id="sc"></div><form class="modal" id="sf" role="dialog" aria-label="Add staff member" novalidate>
+  <div class="dh" style="margin-bottom:14px"><div><h1 style="font-size:1.2rem">Add staff member</h1><p class="sub">They can add and view interns and attachees only. Fields marked * are required.</p></div><button type="button" class="x" id="cx" aria-label="Close">&times;</button></div>
+  <div class="field" id="s-n"><label for="stn">Full name *</label><input id="stn" autocomplete="off"></div>
+  <div class="row2"><div class="field" id="s-i"><label for="sti">ID number *</label><input id="sti" inputmode="numeric" maxlength="10" autocomplete="off"></div><div class="field" id="s-ph"><label for="stph">Phone *</label><input id="stph" inputmode="tel" placeholder="0712 345 678" autocomplete="off"></div></div>
+  <div class="field" id="s-e"><label for="ste">Email *</label><input id="ste" autocapitalize="off" autocomplete="off"></div>
+  <div class="row2"><div class="field" id="s-t"><label for="stt">Work they do *</label><input id="stt" placeholder="e.g. Registration officer" autocomplete="off"></div><div class="field"><label for="std">Department</label><select id="std"><option value="">Select department</option>${Object.entries(D).map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></div></div>
+  <div class="row2"><div class="field"><label for="stno">Staff number</label><input id="stno" autocomplete="off"></div><div class="field"><label for="stj">Date joined</label><input type="date" id="stj"></div></div>
+  <div class="field" id="s-p"><label for="stp">Temporary password *</label><input id="stp" type="text" autocomplete="off" placeholder="12+ characters with upper, lower, number, symbol"></div>
+  <p class="fe" id="ster" role="alert"></p><div class="btnrow"><button type="button" class="btn ghost" id="cx2">Cancel</button><button class="btn" type="submit">Add staff</button></div></form>`;
+  $("sc").onclick=$("cx").onclick=$("cx2").onclick=close;$("stn").focus();
+  $("sf").onsubmit=e=>{e.preventDefault();const v=id=>$(id).value.trim(),em=v("ste").toLowerCase(),pw=$("stp").value;
+    const ok={"s-n":v("stn").length>2,"s-i":/^\d{7,10}$/.test(v("sti")),"s-ph":/^[\d\s+]{9,15}$/.test(v("stph")),"s-e":/^\S+@\S+\.\S+$/.test(em)&&em!==ADMIN.email&&!STAFF.some(x=>x.email===em),"s-t":v("stt").length>1,"s-p":/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{12,}$/.test(pw)};
+    Object.entries(ok).forEach(([k,g])=>$(k).classList.toggle("bad",!g));
+    if(!Object.values(ok).every(Boolean)){$("ster").textContent="Check the highlighted fields. Email must be new, ID 7 to 10 digits, password 12+ characters with upper and lower case, a number and a symbol.";return}
+    STAFF.push({id:nextStaff++,name:v("stn"),idno:v("sti"),phone:v("stph"),email:em,title:v("stt"),dept:v("std"),staffNo:v("stno"),joined:v("stj"),pass:pw,active:true});
+    close();toast("Staff member added");renderStaff();sideInfo()};
+}
 $("tg").onclick=()=>{const r=$("pw").type==="password";$("pw").type=r?"text":"password";$("tg").textContent=r?"Hide":"Show"};
 $("lf").onsubmit=e=>{
   e.preventDefault();const em=$("em").value.trim().toLowerCase(),pw=$("pw").value;
   $("fe").classList.toggle("bad",!/^\S+@\S+\.\S+$/.test(em));$("fp").classList.toggle("bad",!pw);
   if(!/^\S+@\S+\.\S+$/.test(em)||!pw){$("lm").textContent="Enter your email address and password.";return}
-  if(em!==ADMIN.email||pw!==ADMIN.pass){$("lm").textContent="Incorrect login details. Check them and try again.";const a=document.querySelector(".lcard");a.classList.remove("shake");void a.offsetWidth;a.classList.add("shake");return}
-  $("pw").value="";$("login").hidden=true;$("app").hidden=false;go("over");
+  const sf=STAFF.find(x=>x.active&&x.email===em&&x.pass===pw),acc=em===ADMIN.email&&pw===ADMIN.pass?{role:"admin",name:ADMIN.name}:sf?{role:"staff",name:sf.name}:null;
+  if(!acc){$("lm").textContent="Incorrect login details. Check them and try again.";const a=document.querySelector(".lcard");a.classList.remove("shake");void a.offsetWidth;a.classList.add("shake");return}
+  $("pw").value="";$("login").hidden=true;$("app").hidden=false;ME=acc;applyRole();go("over");
 };
-$("so").onclick=()=>{$("app").hidden=true;$("login").hidden=false;$("em").value="";$("lm").textContent=""};
+$("so").onclick=()=>{ME=null;$("v-staff").innerHTML="";close();$("app").hidden=true;$("login").hidden=false;$("em").value="";$("lm").textContent=""};
 
 /* ---------- Navigation ---------- */
 function sideInfo(){const n=PEOPLE.length,i=PEOPLE.filter(p=>p.type==="Intern").length,d=new Set(PEOPLE.map(p=>p.dept)).size;
-  $("nb").textContent=n;$("sn").textContent=n;$("sd").textContent="across "+d+" departments";$("si").style.width=(n?i/n*100:0)+"%";$("l1").textContent=i+" interns";$("l2").textContent=(n-i)+" attachees"}
-function go(v){
+  $("nb").textContent=n;if(ME&&ME.role==="admin")$("ns").textContent=STAFF.length;$("sn").textContent=n;$("sd").textContent="across "+d+" departments";$("si").style.width=(n?i/n*100:0)+"%";$("l1").textContent=i+" interns";$("l2").textContent=(n-i)+" attachees"}
+function go(v){if(!ME)return;if(v==="staff"&&ME.role!=="admin")v="over";
   document.querySelectorAll(".view").forEach(s=>s.classList.toggle("show",s.id==="v-"+v));
   document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
-  sideInfo();if(v==="over")renderOver();if(v==="dir")renderDir();if(v==="cal")renderCal();scrollTo(0,0);
+  sideInfo();if(v==="staff")renderStaff();if(v==="over")renderOver();if(v==="dir")renderDir();if(v==="cal")renderCal();scrollTo(0,0);
 }
 $("nav").onclick=e=>{const b=e.target.closest("button");if(b)go(b.dataset.v)};
 document.addEventListener("click",e=>{if(e.target.closest("[data-add]"))openAdd();const g=e.target.closest("[data-go]");if(g)go(g.dataset.go);const x=e.target.closest("[data-export]");if(x)exportCSV(x.dataset.export==="shown"?filtered():PEOPLE)});
@@ -464,7 +513,7 @@ function renderOver(){
   const rows=Object.entries(by).sort((a,b)=>b[1].t-a[1].t),mx=rows[0][1].t;
   $("bars").innerHTML=rows.map(([k,v])=>`<div class="brow"><span title="${esc(D[k])}">${esc(D[k])}</span><div class="track" title="Male ${v.M} · Female ${v.F} · Not recorded ${v.U}"><i data-w="${v.M/mx*100}" style="background:var(--accent)"></i><i data-w="${v.F/mx*100}" style="background:var(--sky)"></i><i data-w="${v.U/mx*100}" style="background:#cfd6e4"></i></div><b>${v.t}</b></div>`).join("");
   const hr=new Date().getHours(),miss=PEOPLE.filter(p=>!p.gender).length;
-  $("hh").innerHTML=`${hr<12?"Good morning":hr<17?"Good afternoon":"Good evening"}, Admin <span class="wave">👋</span>`;
+  $("hh").innerHTML=`${hr<12?"Good morning":hr<17?"Good afternoon":"Good evening"}, ${esc(ME.name.split(" ")[0])} <span class="wave">👋</span>`;
   $("hs").textContent=`${n} people are on the registry across ${dN} departments. ${miss?miss+" ":"Every record has a gender."}`;
   $("rec").innerHTML=`<h2>Recently added</h2><p class="sub">Newest records first. Click to open.</p><div class="rec">`+[...PEOPLE].sort((a,b)=>b.id-a.id).slice(0,5).map(p=>`<div data-id="${p.id}">${avt(p)}<span>${esc(p.name)}<small>${esc(D[p.dept])}</small></span><span class="chip ${p.type==="Attachee"?"a":""}" style="margin-left:auto">${p.type}</span></div>`).join("")+"</div>";
   $("rec").onclick=e=>{const r=e.target.closest("[data-id]");if(r)openDrawer(+r.dataset.id)};
@@ -488,8 +537,8 @@ const filtered=()=>PEOPLE.filter(p=>(!tab||p.type===tab)&&(!dsel||p.dept===dsel)
 function exportCSV(list){
   if(!list.length){toast("Nothing to download. Clear your filters first.");return}
   const cell=(v,asText)=>{v=String(v??"");if(asText&&/^\d+$/.test(v))return'="'+v+'"';if(/^[=+\-@\t\r]/.test(v)&&!/^\+?[\d\s]+$/.test(v))v="'"+v;return'"'+v.replace(/"/g,'""')+'"'};
-  const head=["No.","Name","Type","Gender","ID number","Phone","Email","Department","Institution","Area of study","Start date","End date","Bank name","Account number"];
-  const rows=list.map((p,i)=>[i+1,p.name,p.type,p.gender,p.idno,p.phone,p.email,D[p.dept],p.inst,p.study,p.start,p.end,p.bank,p.acc].map((v,k)=>cell(v,k===4||k===5||k===13)).join(","));
+  const head=["No.","Name","Type","Gender","ID number","Phone","Email","Department","Institution","Area of study","Start date","End date","Bank name","Account number",...(ME.role==="admin"?["Added by"]:[])];
+  const rows=list.map((p,i)=>[i+1,p.name,p.type,p.gender,p.idno,p.phone,p.email,D[p.dept],p.inst,p.study,p.start,p.end,p.bank,p.acc,...(ME.role==="admin"?[p.by]:[])].map((v,k)=>cell(v,k===4||k===5||k===13)).join(","));
   const blob=new Blob(["\ufeff"+[head.map(h=>cell(h)).join(","),...rows].join("\r\n")],{type:"text/csv;charset=utf-8"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="interns-registry-"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
   toast("Downloaded "+list.length+(list.length===1?" record":" records"));
@@ -511,7 +560,7 @@ function openDrawer(id){
   const p=PEOPLE.find(x=>x.id===id),pr=progress(p);
   layer.innerHTML=`<div class="scrim" id="sc"></div><aside class="drawer" role="dialog" aria-label="Details for ${esc(p.name)}">
   <div class="dh">${avt(p)}<div><h1 style="font-size:1.15rem">${esc(p.name)}</h1><span class="chip ${p.type==="Attachee"?"a":""}">${p.type}</span></div><button class="x" id="cx" aria-label="Close">&times;</button></div>
-  <h2>Progress</h2>${pr===null?'<p class="sub">Set a start and end date to track progress.</p>':`<p class="sub">${pr}% of the period completed</p>`}<div class="prog"><i style="width:0" data-w="${pr||0}"></i></div>
+  ${ME.role==="admin"?`<p class="sub" style="margin:-6px 0 14px">Added by ${esc(p.by||"Unknown")}</p>`:""}<h2>Progress</h2>${pr===null?'<p class="sub">Set a start and end date to track progress.</p>':`<p class="sub">${pr}% of the period completed</p>`}<div class="prog"><i style="width:0" data-w="${pr||0}"></i></div>
   <form id="df2" novalidate><p class="sect">Personal</p>
   <div class="row2"><div class="field"><label>Type</label><select id="d-type">${opt(["Intern","Attachee"],p.type)}</select></div><div class="field"><label>Gender</label><select id="d-gen"><option value="">Not recorded</option>${opt(["Male","Female"],p.gender)}</select></div></div>
   <div class="row2"><div class="field"><label>ID number</label><input id="d-id" value="${esc(p.idno)}" inputmode="numeric" maxlength="10"></div><div class="field"><label>Phone</label><input id="d-ph" value="${esc(p.phone)}" inputmode="tel"></div></div>
@@ -525,7 +574,8 @@ function openDrawer(id){
   requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=layer.querySelector(".prog i");i.style.width=i.dataset.w+"%"}));
   const bk=()=>$("d-bank").hidden=$("d-type").value!=="Intern";bk();$("d-type").onchange=bk;combo($("d-in"));
   $("sc").onclick=$("cx").onclick=$("cx2").onclick=close;
-  $("df2").onsubmit=e=>{e.preventDefault();
+  if(ME.role!=="admin"){$("df2").querySelectorAll("input,select").forEach(x=>x.disabled=true);$("df2").querySelector("button[type=submit]").hidden=true}
+  $("df2").onsubmit=e=>{e.preventDefault();if(ME.role!=="admin")return;
     if($("d-s").value&&$("d-e").value&&$("d-e").value<=$("d-s").value){$("d-err").textContent="The end date must be after the start date.";return}
     Object.assign(p,{type:$("d-type").value,gender:$("d-gen").value,idno:$("d-id").value.trim(),phone:$("d-ph").value.trim(),email:$("d-em").value.trim(),dept:$("d-dp").value,inst:$("d-in").value.trim(),study:$("d-st").value.trim(),start:$("d-s").value,end:$("d-e").value,bank:$("d-bn").value.trim(),acc:$("d-ac").value.trim()});
     close();toast("Changes saved");refresh()};
@@ -552,7 +602,7 @@ function openAdd(){
     const v=id=>$(id).value.trim(),ok={"a-n":v("n").length>2,"a-i":/^\d{7,10}$/.test(v("i")),"a-p":/^[\d\s+]{9,15}$/.test(v("p")),"a-e":/^\S+@\S+\.\S+$/.test(v("e")),"a-d":!!v("d"),"a-st":!!v("st"),"a-s":!!v("s"),"a-en":!!v("en")&&v("en")>v("s")};
     Object.entries(ok).forEach(([k,g])=>$(k).classList.toggle("bad",!g));
     if(!Object.values(ok).every(Boolean)){$("ae").textContent="Check the highlighted fields. The end date must be after the start date.";return}
-    PEOPLE.unshift({id:nextId++,name:v("n"),dept:v("d"),type:kind(),gender:v("g"),idno:v("i"),phone:v("p"),email:v("e"),inst:v("in"),study:v("st"),start:v("s"),end:v("en"),bank:kind()==="Intern"?v("bn"):"",acc:kind()==="Intern"?v("ac"):""});
+    PEOPLE.unshift({by:ME.name,id:nextId++,name:v("n"),dept:v("d"),type:kind(),gender:v("g"),idno:v("i"),phone:v("p"),email:v("e"),inst:v("in"),study:v("st"),start:v("s"),end:v("en"),bank:kind()==="Intern"?v("bn"):"",acc:kind()==="Intern"?v("ac"):""});
     close();toast(kind()+" registered");refresh()};
 }
 
@@ -575,7 +625,7 @@ function drawCal(){
   $("cg").innerHTML=h;
   const pr=progress(p),NA='<span class="muted">Not recorded</span>',vv=x=>x?esc(x):NA,fd=d=>d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
   let body,st=null;
-  if(pr===null){body=`<p class="sub" style="margin:18px 0">No period set yet. Add a start and end date to see progress, milestones and days remaining.</p><button class="btn" id="setp">Set period</button>`}
+  if(pr===null){body=`<p class="sub" style="margin:18px 0">No period set yet. Add a start and end date to see progress, milestones and days remaining.</p>${ME.role==="admin"?'<button class="btn" id="setp">Set period</button>':""}`}
   else{
     const tot=Math.round((e-s)/dayMs)+1,el=today<s?0:Math.min(tot,Math.round((today-s)/dayMs)+1),rem=tot-el;
     let wd=0;for(let d=new Date(Math.max(+today+(today<s?0:dayMs),+s));d<=e;d=new Date(+d+dayMs)){const g=d.getDay();if(g&&g<6)wd++}
@@ -584,7 +634,7 @@ function drawCal(){
     <div class="mini"><div><b>${tot}</b><span>Total days (${Math.ceil(tot/7)} weeks)</span></div><div><b>${el}</b><span>Days completed</span></div><div><b>${rem}</b><span>Days remaining</span></div><div><b>${wd}</b><span>Working days left</span></div></div>
     <p class="sect" style="margin-top:4px">Milestones</p><ul class="tl">`+[25,50,75,100].map(k=>{const d=new Date(+s+Math.round((tot-1)*k/100)*dayMs);return`<li class="${d<=today?"d":""}">${k}% complete<small>${fd(d)}</small></li>`}).join("")+`</ul>`}
   $("cs").innerHTML=`<div class="dh" style="margin-bottom:10px">${avt(p)}<div><h2 style="font-size:1.05rem">${esc(p.name)}</h2><span class="chip ${p.type==="Attachee"?"a":""}">${p.type}</span> ${st?`<span class="chip ${st[1]}">${st[0]}</span>`:""}</div></div><p class="sub">${esc(D[p.dept])}</p>`+body+
-   `<p class="sect">Details</p><div class="dl"><div><span>Gender</span><b>${vv(p.gender)}</b></div><div><span>ID number</span><b>${vv(p.idno)}</b></div><div><span>Phone</span><b>${vv(p.phone)}</b></div><div><span>Email</span><b>${vv(p.email)}</b></div><div><span>Institution</span><b>${vv(p.inst)}</b></div><div><span>Area of study</span><b>${vv(p.study)}</b></div>${p.type==="Intern"?`<div><span>Bank details</span><b>${p.bank&&p.acc?"On file":NA}</b></div>`:""}</div><div class="btnrow" style="margin-top:16px"><button class="btn ghost" id="editp">Edit details</button></div>`;
+   `<p class="sect">Details</p><div class="dl"><div><span>Gender</span><b>${vv(p.gender)}</b></div><div><span>ID number</span><b>${vv(p.idno)}</b></div><div><span>Phone</span><b>${vv(p.phone)}</b></div><div><span>Email</span><b>${vv(p.email)}</b></div><div><span>Institution</span><b>${vv(p.inst)}</b></div><div><span>Area of study</span><b>${vv(p.study)}</b></div>${p.type==="Intern"?`<div><span>Bank details</span><b>${p.bank&&p.acc?"On file":NA}</b></div>`:""}</div><div class="btnrow" style="margin-top:16px"><button class="btn ghost" id="editp">${ME.role==="admin"?"Edit details":"View full record"}</button></div>`;
   requestAnimationFrame(()=>requestAnimationFrame(()=>{const i=$("cs").querySelector(".prog i");if(i)i.style.width=i.dataset.w+"%"}));
   ["setp","editp"].forEach(id=>{const b=$(id);if(b)b.onclick=()=>openDrawer(p.id)});
 }
