@@ -235,8 +235,52 @@ tbody tr{cursor:pointer;transition:background .12s}tbody tr:hover{background:var
 @media(max-width:760px){.sc,.me,.bdg,.side::after{display:none}.side{overflow:visible}.side #so{display:none}}
 .btn.sm{padding:6px 12px;font-size:.78rem}
 input:disabled,select:disabled{background:#f6f8fc;color:var(--ink);opacity:1;cursor:default;-webkit-text-fill-color:var(--ink)}
+/* Login page background: a navy diagonal band (same navy as your banner and sidebar) over a light grid, with soft rings.
+   Optional photo: save an image as images/login-bg.jpg and it shows faintly inside the navy band. */
+#login{position:relative;overflow:hidden;background-color:#f3f5f9;background-image:linear-gradient(rgba(15,31,61,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(15,31,61,.045) 1px,transparent 1px);background-size:44px 44px}
+#login::before{content:"";position:absolute;left:0;right:0;top:0;height:80%;background:radial-gradient(rgba(255,255,255,.13) 1px,transparent 1.5px) 0 0/26px 26px,linear-gradient(rgba(15,31,61,.9),rgba(15,31,61,.9)),url("images/login-bg.jpg") center/cover no-repeat,#0f1f3d;clip-path:polygon(0 0,100% 0,100% 52%,0 100%);pointer-events:none}
+#login::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;right:-130px;top:-210px;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 70px rgba(255,255,255,.035),0 0 0 140px rgba(255,255,255,.025);animation:drift 12s ease-in-out infinite alternate;pointer-events:none}
+#login>*{position:relative;z-index:1}
+#login .lcard{box-shadow:0 2px 4px rgba(15,31,61,.08),0 30px 70px rgba(15,31,61,.28)}
+.mbar{display:none}
+@media(max-width:760px){
+  body{overflow-x:clip}
+  main{padding:0 16px calc(96px + env(safe-area-inset-bottom))}
+  .mbar{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:25;background:var(--ink);margin:0 -16px 16px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;box-shadow:0 4px 16px rgba(15,31,61,.18)}
+  .mbar b{color:#fff;font-weight:600;font-size:.95rem}
+  .mbar .logo-tile{min-width:38px;height:38px;border-radius:10px;padding:3px 6px;box-shadow:none}.mbar .logo-tile img{max-height:28px;max-width:70px}.mbar .logo-tile svg{width:22px;height:22px}
+  .mbar .btn{margin-left:auto}
+  .btn{min-height:44px}.btn.sm{min-height:36px}.tabs button{min-height:36px}
+  input,select{font-size:16px}
+  h1{font-size:1.25rem}
+  .top{align-items:stretch;margin-bottom:16px}.top>div:first-child{width:100%}
+  .top .btn{flex:1 1 150px}.top>.btn{width:100%}
+  .top>div[style*="min-width"]{min-width:0!important;width:100%}
+  .hero{padding:22px 20px;border-radius:16px}.hero h1{font-size:1.5rem}.clock b{font-size:2.1rem}
+  .qa .btn{flex:1 1 140px}
+  .stats{gap:10px}.stat{padding:14px;gap:10px}.stat i{width:38px;height:38px}.stat b{font-size:1.3rem}.stat span{font-size:.75rem}
+  .card{padding:16px}
+  .brow{grid-template-columns:1fr 28px;gap:5px 10px}.brow>span:first-child{grid-column:1/-1}
+  .tools{gap:8px}.search{min-width:100%}.tabs{width:100%}.tabs button{flex:1}.tools select{width:100%;max-width:none}
+  .card.tw{background:none;border:0;box-shadow:none;padding:0;overflow:visible}
+  .tw table,.tw tbody{display:block;min-width:0!important}.tw thead{display:none}
+  .tw tr{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;background:#fff;border:1px solid #e3e8f0;border-radius:14px;padding:14px;margin-bottom:10px}
+  .tw td{border:0;padding:0;font-size:.82rem;min-width:0;word-break:break-word}
+  .tw td:first-child,.tw td[data-l=""]{grid-column:1/-1}
+  .tw td[data-l]::before{content:attr(data-l);display:block;font-size:.68rem;font-weight:600;color:var(--text);margin-bottom:1px}
+  .tw td:first-child::before,.tw td[data-l=""]::before{display:none}
+  .tw td[data-l=""]{text-align:left!important}
+  .empty{background:#fff;border-radius:14px;border:1px solid #e3e8f0}
+  .drawer{padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+  .modal{left:0;right:0;bottom:0;top:auto;width:100%;max-height:92dvh;transform:none;border-radius:18px 18px 0 0;padding:22px 18px calc(22px + env(safe-area-inset-bottom));animation:sheet .3s cubic-bezier(.2,.8,.2,1)}
+  .btnrow .btn{flex:1}
+  .calhead button{width:40px;height:40px}.calgrid{gap:4px}.day{font-size:.8rem;border-radius:7px}
+  .toast{bottom:calc(86px + env(safe-area-inset-bottom));max-width:calc(100% - 32px);text-align:center}
+}
+@keyframes sheet{from{transform:translateY(100%)}}
+@media(max-width:380px){.stats{grid-template-columns:1fr}}
 /* Reduced motion: only calm the endless background loops, keep the meaningful animations */
-@media(prefers-reduced-motion:reduce){.auth-l::before,.auth-l::after,.hero::before,.hero::after,.wave{animation:none}}
+@media(prefers-reduced-motion:reduce){.auth-l::before,.auth-l::after,.hero::before,.hero::after,.wave,#login::after{animation:none}}
 </style>
 </head>
 <body>
@@ -282,6 +326,7 @@ input:disabled,select:disabled{background:#f6f8fc;color:var(--ink);opacity:1;cur
   </aside>
 
   <main>
+    <header class="mbar"><div class="logo-tile"><img class="lg" src="images/coat-of-arms.jpg" alt="Organisation logo"><svg class="fb" hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div><b>Interns Registry</b><button type="button" id="so2" class="btn lt sm">Sign out</button></header>
     <!-- Overview -->
     <section class="view show" id="v-over">
       <div class="hero">
@@ -444,6 +489,7 @@ function renderStaff(){
   const act=STAFF.filter(x=>x.active).length,NS='<span class="muted">Not set</span>';
   $("v-staff").innerHTML=`<div class="top"><div><h1>Staff</h1><p class="sub">Only administrators can see this page. Staff can add and view interns and attachees, nothing more.</p></div><button class="btn" id="addstaff">Add staff member</button></div>
   <div class="card tw"><table style="min-width:1000px"><thead><tr><th>Staff member</th><th>ID number</th><th>Phone</th><th>Email</th><th>Department</th><th>Status</th><th>Added</th><th></th></tr></thead><tbody>`+(STAFF.length?STAFF.map(x=>`<tr data-sid="${x.id}"><td><div class="who"><span class="av">${esc(ini(x.name))}</span><span>${esc(x.name)}<small style="display:block;font-weight:400;color:var(--text)">${esc(x.title)}</small></span></div></td><td>${esc(x.idno)}</td><td>${esc(x.phone)}</td><td>${esc(x.email)}</td><td>${x.dept?esc(D[x.dept]):NS}</td><td><span class="chip ${x.active?"a":"w"}">${x.active?"Active":"Disabled"}</span></td><td>${PEOPLE.filter(p=>p.by===x.name).length}</td><td style="text-align:right;white-space:nowrap"><button class="btn ghost sm" data-st="${x.id}" data-a="tog">${x.active?"Disable":"Enable"}</button> <button class="btn ghost sm" data-st="${x.id}" data-a="del">Remove</button></td></tr>`).join(""):`<tr><td colspan="8" class="empty">No staff yet. Add the first one.</td></tr>`)+`</tbody></table></div><p class="count">${act} active of ${STAFF.length}. Click a row to see all of a person's details.</p>`;
+  labelCells("#v-staff table");
   $("addstaff").onclick=openStaff;
   $("v-staff").onclick=e=>{const b=e.target.closest("[data-st]");
     if(b){const x=STAFF.find(y=>y.id===+b.dataset.st);if(!x)return;
@@ -488,9 +534,11 @@ $("lf").onsubmit=e=>{
   if(!acc){$("lm").textContent="Incorrect login details. Check them and try again.";const a=document.querySelector(".lcard");a.classList.remove("shake");void a.offsetWidth;a.classList.add("shake");return}
   $("pw").value="";$("login").hidden=true;$("app").hidden=false;ME=acc;applyRole();go("over");
 };
+$("so2").onclick=()=>$("so").click();
 $("so").onclick=()=>{ME=null;$("v-staff").innerHTML="";close();$("app").hidden=true;$("login").hidden=false;$("em").value="";$("lm").textContent=""};
 
 /* ---------- Navigation ---------- */
+function labelCells(sel){const t=document.querySelector(sel);if(!t)return;const h=[...t.querySelectorAll("thead th")].map(x=>x.textContent);t.querySelectorAll("tbody tr").forEach(r=>[...r.children].forEach((c,i)=>c.dataset.l=h[i]||""))}
 function sideInfo(){const n=PEOPLE.length,i=PEOPLE.filter(p=>p.type==="Intern").length,d=new Set(PEOPLE.map(p=>p.dept)).size;
   $("nb").textContent=n;if(ME&&ME.role==="admin")$("ns").textContent=STAFF.length;$("sn").textContent=n;$("sd").textContent="across "+d+" departments";$("si").style.width=(n?i/n*100:0)+"%";$("l1").textContent=i+" interns";$("l2").textContent=(n-i)+" attachees"}
 function go(v){if(!ME)return;if(v==="staff"&&ME.role!=="admin")v="over";
@@ -546,7 +594,7 @@ function exportCSV(list){
 function renderDir(){
   const L=filtered();
   $("tb").innerHTML=L.map(p=>`<tr data-id="${p.id}"><td><div class="who">${avt(p)}${esc(p.name)}</div></td><td>${esc(D[p.dept])}</td><td><span class="chip ${p.type==="Attachee"?"a":""}">${p.type}</span></td><td>${p.gender||'<span class="muted">Not recorded</span>'}</td><td>${p.start&&p.end?fmtD(p.start)+" – "+fmtD(p.end):'<span class="muted">Not set</span>'}</td></tr>`).join("");
-  $("em0").hidden=L.length>0;$("ct").textContent=`Showing ${L.length} of ${PEOPLE.length}`;
+  $("em0").hidden=L.length>0;$("ct").textContent=`Showing ${L.length} of ${PEOPLE.length}`;labelCells("#v-dir table");
 }
 $("tb").onclick=e=>{const r=e.target.closest("tr");if(r)openDrawer(+r.dataset.id)};
 
